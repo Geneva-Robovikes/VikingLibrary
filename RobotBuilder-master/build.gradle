@@ -1,0 +1,142 @@
+plugins {
+    id 'java'
+    id 'jacoco'
+    id 'maven'
+    id 'application'
+    id 'maven-publish'
+    id "com.jfrog.artifactory" version "4.9.8"
+    id 'edu.wpi.first.wpilib.versioning.WPILibVersioningPlugin' version '4.0.1'
+    id 'edu.wpi.first.wpilib.repositories.WPILibRepositoriesPlugin' version '2020.1'
+    id 'io.franzbecker.gradle-lombok' version '3.1.0'
+    id "com.github.johnrengelman.shadow" version "5.1.0"
+}
+
+if (project.hasProperty('buildServer')) {
+    wpilibVersioning.buildServerMode = true
+}
+
+if (project.hasProperty('releaseMode')) {
+    wpilibVersioning.releaseMode = true
+}
+
+repositories {
+    mavenCentral()
+}
+if (project.hasProperty('releaseMode')) {
+    wpilibRepositories.addAllReleaseRepositories(project)
+} else {
+    wpilibRepositories.addAllDevelopmentRepositories(project)
+}
+
+if (System.getenv()['RUN_AZURE_ARTIFACTORY_RELEASE'] != null) {
+  artifactory {
+    contextUrl = 'https://frcmaven.wpi.edu/artifactory' // base artifactory url
+    publish {
+      repository {
+        if (project.hasProperty('releaseMode')) {
+          repoKey = 'release'
+        } else {
+          repoKey = 'development'
+        }
+        username = System.getenv()['ARTIFACTORY_PUBLISH_USERNAME']
+        password = System.getenv()['ARTIFACTORY_PUBLISH_PASSWORD']
+        maven = true
+      }
+      defaults {
+          publications ('maven')
+      }
+    }
+    clientConfig.info.setBuildName('RobotBuilder')
+  }
+  publish.dependsOn artifactoryPublish
+}
+
+mainClassName = "robotbuilder.RobotBuilder"
+
+wpilibVersioning.version.finalizeValue()
+
+jacoco {
+    toolVersion = "0.8.4"
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled = true
+        html.enabled = true
+    }
+}
+
+check.dependsOn jacocoTestReport
+
+lombok {
+    version = "1.18.8"
+    sha256 = ""
+}
+
+compileJava {
+    options.encoding = "UTF-8"
+}
+
+if (!hasProperty('mainClass')) {
+    ext.mainClass = mainClassName
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'org.apache.velocity:velocity-engine-core:2.1'
+    compile 'org.yaml:snakeyaml:1.25'
+    compile 'commons-io:commons-io:2.6'
+    compile 'org.apache.commons:commons-lang3:3.9'
+    compile 'org.slf4j:slf4j-api:1.7.28'
+    compile 'org.slf4j:slf4j-jdk14:1.7.28'
+    compile 'com.sun.activation:javax.activation:1.2.0'
+    testCompile 'junit:junit:4.12'
+    annotationProcessor 'org.projectlombok:lombok:1.18.8'
+    compileOnly 'org.projectlombok:lombok:1.18.8'
+}
+
+test {
+    testLogging {
+        events "failed"
+        exceptionFormat "full"
+    }
+}
+
+jar {
+
+    from(configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }) {
+        exclude "META-INF/*.SF"
+        exclude "META-INF/*.DSA"
+        exclude "META-INF/*.RSA"
+    }
+
+    manifest {
+        attributes('Implementation-Title': 'RobotBuilder',
+                    'Implementation-Version': wpilibVersioning.version.get(),
+                    'Built-By': System.getProperty('user.name'),
+                    'Built-Date': new Date(),
+                    'Built-JDK': System.getProperty('java.version'))
+    }
+}
+
+
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            artifact(shadowJar) {
+                classifier null
+            }
+            groupId 'edu.wpi.first.wpilib'
+            artifactId 'RobotBuilder'
+            version wpilibVersioning.version.get()
+        }
+    }
+}
+
+wrapper {
+    gradleVersion = '5.4.1'
+}
