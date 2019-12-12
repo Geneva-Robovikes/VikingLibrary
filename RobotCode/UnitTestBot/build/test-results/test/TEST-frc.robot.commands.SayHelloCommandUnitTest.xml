@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="frc.robot.commands.SayHelloCommandUnitTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2019-12-06T14:20:55" hostname="ABECK-PC" time="4.17">
+  <properties/>
+  <testcase name="itTurnsOffMyLEDWhenStopping" classname="frc.robot.commands.SayHelloCommandUnitTest" time="1.139"/>
+  <testcase name="itRegistersTheCorrectSubsystems" classname="frc.robot.commands.SayHelloCommandUnitTest" time="0.004"/>
+  <testcase name="itCanFlashMyLEDEvery200ms" classname="frc.robot.commands.SayHelloCommandUnitTest" time="3.022"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

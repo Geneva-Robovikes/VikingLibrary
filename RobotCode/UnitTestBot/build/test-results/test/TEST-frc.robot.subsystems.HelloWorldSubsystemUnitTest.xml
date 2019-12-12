@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="frc.robot.subsystems.HelloWorldSubsystemUnitTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2019-12-06T14:20:59" hostname="ABECK-PC" time="0.02">
+  <properties/>
+  <testcase name="itShouldReferencePort0ForLED" classname="frc.robot.subsystems.HelloWorldSubsystemUnitTest" time="0.001"/>
+  <testcase name="itShouldNotInstantiateWithNoLED" classname="frc.robot.subsystems.HelloWorldSubsystemUnitTest" time="0.0"/>
+  <testcase name="itShouldTurnOffTheLED" classname="frc.robot.subsystems.HelloWorldSubsystemUnitTest" time="0.001"/>
+  <testcase name="itShouldInstantiateGivenAnLED" classname="frc.robot.subsystems.HelloWorldSubsystemUnitTest" time="0.0"/>
+  <testcase name="itShouldToggleTheLED" classname="frc.robot.subsystems.HelloWorldSubsystemUnitTest" time="0.013"/>
+  <testcase name="itShouldNotInstantiateWithANullLED" classname="frc.robot.subsystems.HelloWorldSubsystemUnitTest" time="0.0"/>
+  <testcase name="itShouldTurnOnTheLED" classname="frc.robot.subsystems.HelloWorldSubsystemUnitTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
