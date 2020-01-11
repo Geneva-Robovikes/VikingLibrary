@@ -7,6 +7,7 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -23,6 +24,7 @@ public class HelloWorldSubsystem extends Subsystem {
    * hardware will not change out from under it throughout its life.
    */
   private final DigitalOutput led;
+  private int number;
 
   /**
    * We create a constructor to inject "dependencies" into our class. Do not instantiate
@@ -32,7 +34,7 @@ public class HelloWorldSubsystem extends Subsystem {
    * of automated testing, we must always be able to instantiate our class.
    * @param led
    */
-  public HelloWorldSubsystem(DigitalOutput led) {
+  public HelloWorldSubsystem(DigitalOutput led, int number) {
 
     // Another invariant is that our class always assumes that a
     // valid reference to our LED will exist. So complain 
@@ -41,7 +43,19 @@ public class HelloWorldSubsystem extends Subsystem {
       throw new IllegalArgumentException("I must have what at least looks like an LED!");
     }
 
+
+
     // Assign our invited guest to an instance variable, so we can use it later.
+    this.led = led;
+    this.number = number;
+  }
+  public HelloWorldSubsystem(DigitalOutput led) {
+    // Another invariant is that our class always assumes that a
+    // valid reference to our LED will exist. So complain
+    // if our invited guest is nothingness.
+    if (led == null) {
+      throw new IllegalArgumentException("I must have what at least looks like an LED!");
+    }
     this.led = led;
   }
 
@@ -59,11 +73,13 @@ public class HelloWorldSubsystem extends Subsystem {
     throw new IllegalAccessError("There is only one way to construct me. Pass in my dependencies please.");
   }
 
+
   /**
    * Instance method to interact with our hardware...turning on LED.
    */
   public void turnOnLED() {
-    led.set(true);
+    if (number == 5)
+        led.set(true);
   }
 
   /**

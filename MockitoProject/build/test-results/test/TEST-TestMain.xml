@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="TestMain" tests="1" skipped="0" failures="0" errors="0" timestamp="2020-01-11T20:56:45" hostname="GHS-Z240-19031" time="0.318">
+  <properties/>
+  <testcase name="iterator_will_return_hello_world" classname="TestMain" time="0.318"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

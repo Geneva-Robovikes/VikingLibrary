@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="frc.robot.commands.SayHelloCommandIntegrationTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2019-12-06T14:20:51" hostname="ABECK-PC" time="3.94">
+<testsuite name="frc.robot.commands.SayHelloCommandIntegrationTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2020-01-11T18:43:07" hostname="GHS-Z240-19031" time="3.012">
   <properties/>
-  <testcase name="itCanFlashMyLEDEvery200ms" classname="frc.robot.commands.SayHelloCommandIntegrationTest" time="3.94"/>
+  <testcase name="itCanFlashMyLEDEvery200ms" classname="frc.robot.commands.SayHelloCommandIntegrationTest" time="3.012"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

@@ -1,6 +1,7 @@
 package frc.robot.commands;
 
 
+import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.command.SchedulerTestHelper;
 import frc.robot.subsystems.HelloWorldSubsystem;
@@ -68,9 +69,10 @@ public class SayHelloCommandIntegrationTest {
         // the subsystem can be passed its external dependencies, it does not
         // care that the hardware is not real.
         DigitalOutput ledMock = mock(DigitalOutput.class);
+        int number = 0;
         // Note that we do not mock the subsystem because we are going to
         // test the result on the subsystem by exercising behavior on the command.
-        HelloWorldSubsystem classUnderTest = new HelloWorldSubsystem(ledMock);
+        HelloWorldSubsystem classUnderTest = new HelloWorldSubsystem(ledMock, number);
         SayHelloCommand sayHelloCommand = new SayHelloCommand(classUnderTest);
 
         // Act

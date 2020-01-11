@@ -7,14 +7,12 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.DigitalOutput;
-import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.buttons.*;
-import edu.wpi.first.wpilibj.Joystick;
 import frc.robot.commands.SayHelloCommand;
 import frc.robot.subsystems.HelloWorldSubsystem;
 
@@ -38,6 +36,8 @@ import frc.robot.subsystems.HelloWorldSubsystem;
 public class Robot extends TimedRobot {
   // Declare hardware
   private final DigitalOutput led;
+  // Declare int
+  private int number;
   // Declare subsystems
   private final HelloWorldSubsystem helloWorldSubsystem;
   // Declare commands
@@ -59,7 +59,8 @@ public class Robot extends TimedRobot {
   public Robot() {
     super();
     this.led = new DigitalOutput(RobotMap.led);
-    this.helloWorldSubsystem = new HelloWorldSubsystem(led);
+    this.number = 0;
+    this.helloWorldSubsystem = new HelloWorldSubsystem(led, number);
     this.sayHelloCommand = new SayHelloCommand(helloWorldSubsystem);
     this.stick = new Joystick(RobotMap.joystickPort);
     this.button = new JoystickButton(stick, RobotMap.buttonNumber);

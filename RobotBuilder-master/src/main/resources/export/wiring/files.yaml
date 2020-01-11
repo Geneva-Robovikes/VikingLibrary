@@ -1,4 +1,0 @@
-- !File
-  export: $export-path
-  source: ${exporter_path}wiring.html
-  update: Overwrite

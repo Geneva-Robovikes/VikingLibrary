@@ -1,5 +1,6 @@
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.AnalogGyro;
 import frc.robot.RobotMap;
 import edu.wpi.first.wpilibj.DigitalOutput;
 import org.junit.*;
@@ -27,9 +28,10 @@ public class HelloWorldSubsystemUnitTest {
     public void itShouldInstantiateGivenAnLED() {
         // Assemble
         DigitalOutput mockLED = mock(DigitalOutput.class);
+        int number = 0;
 
         // Act
-        HelloWorldSubsystem classUnderTest = new HelloWorldSubsystem(mockLED);
+        HelloWorldSubsystem classUnderTest = new HelloWorldSubsystem(mockLED, number);
 
         // Assert
         // Our test decorator contains the assertion
@@ -45,7 +47,7 @@ public class HelloWorldSubsystemUnitTest {
         // Nothing to do
 
         // Act
-        HelloWorldSubsystem classUnderTest = new HelloWorldSubsystem(null);
+        HelloWorldSubsystem classUnderTest = new HelloWorldSubsystem(null, 5);
 
         // Assert
         // Our test decorator contains the assertion
@@ -71,21 +73,26 @@ public class HelloWorldSubsystemUnitTest {
      * A test to make sure we have set the state of the led digital output to true.
      */
     @Test
-    public void itShouldTurnOnTheLED() {
+    public void itShouldTurnOnTheLEDIfNumberIsFive() {
         // Assemble
         DigitalOutput mockLED = mock(DigitalOutput.class);
-        HelloWorldSubsystem classUnderTest = new HelloWorldSubsystem(mockLED);
+        int number = 0;
+
+        HelloWorldSubsystem classUnderTest = new HelloWorldSubsystem(mockLED, number);
 
         // Act
         classUnderTest.turnOnLED();
 
         // Assert
-        // Make sure that we have set the digital output to true.
+        // Make sure that we have set the digital output to true
+        //      only when the GYRO ANGLE == 5.
         // This may seem useless, but for the purpose of this test, we don't
         // care whether the DigitalOutput actually works (we assume it does).
         // We just want to make sure we have done our job by setting the state
         // properly.
+        verify(number = 5);
         verify(mockLED, times(1)).set(true);
+        //verify(mockGyro,  )
     }
 
     /**
